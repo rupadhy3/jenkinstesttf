@@ -13,12 +13,15 @@ resource "aws_instance" "myserver" {
   key_name = "aws_key_pair.mykeypair.key_name"
 
   tags = {
-    Name = "Gagan-devops-ec2-instance-v1"
+    Name = "rak-29oct"
     env = "prod"
   }
   provisioner "local-exec" {
     command = "echo The servers IP address is ${self.public_ip} && echo ${self.public_ip} > /root/inv"
   }
+  depends_on = [
+    aws_key_pair.mykeypair,
+  ]
 }
 
 resource "aws_key_pair" "mykeypair" {
